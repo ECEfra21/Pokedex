@@ -14,61 +14,12 @@
     </div>
     <PokemonGrid Pokemons="Pokemons" NumbersRows="5"> </PokemonGrid>
 </div>
-
-@* 
-    @if (Pokemons is null)
-{
-    <p><em> Loadin... </em></p>
-}
-else
-{
-    <div>
-        @for (int i = 0; i < NumbersRows; i++)
-        {
-            <div class="row">
-                @foreach (Pokemon item in Pokemons.Skip(i * 6).Take(6))
-                {
-                    if (!(item is null))
-                    {
-                        <div class="card pokeCard mb-4 bg-@(item.Types.FirstOrDefault().PokemonType.Name)">
-                            <div class="card-header">
-                                <h4 class="card-title"> @item.Name.ToUpper()</h4>
-                                </div>
-                            <div class="card-body">
-
-                                <img src="@item.Sprite.FrontShiny" class="img-fluid imagesPoke" alt="@item.Name">
-                            </div>
-                            <div class="card-footer">
-                                <div>
-                                    <fieldset title="Types">
-                                        <ul class="list-group">
-                                            @foreach (var item2 in item.Types)
-                                            {
-                                                <li class="list-group-item d-flex justify-content-between align-items-lg-start bg-@(item2.PokemonType.Name)">
-                                                    <span class="badge bg-primary rounded-pill">@item2.Slot</span>
-                                                    <p>@item2.PokemonType.Name </p>
-                                                </li>
-                                            }
-                                        </ul>
-                                   </fieldset>
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                }
-            </div>
-        }
-    </div>
-}
- *@
 @code {
 
     public List<Pokemon> Pokemons { get; set; }
     public PaginationMetadata Paginacion { get; set; } = new PaginationMetadata();
     public PaginationParameters Parametros { get; set; } = new PaginationParameters();
     public int Spread { get; set; }
-    // public int NumbersRows { get; set; } = 5;
     protected override async Task OnInitializedAsync()
     {
         await GetPagerPokemons();
@@ -80,13 +31,9 @@ else
     }
     private async Task GetPagerPokemons()
     {
-        List<Pokemon> poks = new List<Pokemon>();
         ResultObjetc res =await Client.GetAll(Parametros);
-        foreach (Pokemon item in res.Pokemons)
-            poks.Add(await Client.Get(item.Name));
-        Pokemons = poks;
+        Pokemons = res.Pokemons;
         Paginacion.Items = res.Count;
         Paginacion.TotalPages = res.Count / Parametros.PageSize;
-
     }
 }

@@ -21,10 +21,8 @@ else
                                 <h4 class="card-title"> @item.Name.ToUpper()</h4>
                             </div>
                             <div class="card-body">
-
                                 <img src="@item.Sprite.FrontShiny" class="img-fluid imagesPoke" alt="@item.Name">
-                            </div>
-                            <div class="card-footer">
+                                <br>
                                 <div>
                                     <fieldset title="Types">
                                         <ul class="list-group">
@@ -37,6 +35,13 @@ else
                                             }
                                         </ul>
                                     </fieldset>
+
+                                </div>
+
+                            </div>
+                            <div class="card-footer">
+                                <div>
+                                    <a href="/pokemondetail/@item.Name" class="btn btn-primary">Detail</a>
                                 </div>
                             </div>
                         </div>

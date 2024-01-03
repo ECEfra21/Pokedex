@@ -9,5 +9,9 @@ namespace BlazorPokedex.Model.pokemon
         public List<Pokemon> Pokemons { get; set; }
         [JsonProperty("count")]
         public int Count { get; set; }
+        public ResultObjetc()
+        {
+            Pokemons = new List<Pokemon>();
+        }
     }
 }
