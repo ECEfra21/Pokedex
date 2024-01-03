@@ -1,0 +1,49 @@
+﻿@using BlazorPokedex.Model.peager;
+
+<fieldset>
+
+    <nav>
+        <ul class="pagination justify-content-center">
+            @foreach (PaginationButton item in _Botones)
+            {
+                <li @onclick="()=> OnSelectedPage(item)" style="cursor:pointer" class="page-item @(item.Enable ? null: "disabled") @(item.Active ? "active" : null)">
+                    <span class="page-link" href="">@item.Text </span>
+                </li>
+            }
+        </ul>
+    </nav>
+</fieldset>
+
+@code {
+    private List<PaginationButton> _Botones;
+    [Parameter]
+    public PaginationParameters Parametros { get; set; } = new PaginationParameters();
+    [Parameter]
+    public PaginationMetadata Metadata { get; set; }
+    [Parameter]
+    public EventCallback<int> SelectPage { get; set; }
+    [Parameter]
+    public int Spred { get; set; }
+    protected override void OnParametersSet()
+    {
+        CreatePaginationButtons();
+    }
+    public void CreatePaginationButtons()
+    {
+        _Botones = new List<PaginationButton>();
+        _Botones.Add(new PaginationButton(Metadata.CurrentPage - 1, Metadata.HasPrevios, "Previous"));
+        for (int i = 1; i < Metadata.TotalPages; i++)
+        {
+            if (i >= Metadata.CurrentPage - Spred && i <= Metadata.CurrentPage + Spred)
+                _Botones.Add(new PaginationButton(i, true, i.ToString()) { Active = Metadata.CurrentPage.Equals(i) });
+        }
+        _Botones.Add(new PaginationButton(Metadata.CurrentPage + 1, Metadata.HasNext, "Next"));
+    }
+    private async Task OnSelectedPage(PaginationButton botones)
+    {
+        if (botones.Page.Equals(Metadata.CurrentPage) && !botones.Enable)
+            return;
+        Metadata.CurrentPage = botones.Page;
+        await SelectPage.InvokeAsync(botones.Page);
+    }
+}

@@ -1,0 +1,55 @@
+﻿@using BlazorPokedex.Model.pokemon;
+
+<h3>PokemonGrid</h3>
+
+@if (Pokemons is null)
+{
+    <p><em> Loadin... </em></p>
+}
+else
+{
+    <div>
+        @for (int i = 0; i < NumbersRows; i++)
+        {
+            <div class="row sticktDiv">
+                @foreach (Pokemon item in Pokemons.Skip(i * 6).Take(4))
+                {
+                    if (!(item is null))
+                    {
+                        <div class="card pokeCard mb-4 bg-@(item.Types.FirstOrDefault().PokemonType.Name)">
+                            <div class="card-header">
+                                <h4 class="card-title"> @item.Name.ToUpper()</h4>
+                            </div>
+                            <div class="card-body">
+
+                                <img src="@item.Sprite.FrontShiny" class="img-fluid imagesPoke" alt="@item.Name">
+                            </div>
+                            <div class="card-footer">
+                                <div>
+                                    <fieldset title="Types">
+                                        <ul class="list-group">
+                                            @foreach (var item2 in item.Types)
+                                            {
+                                                <li class="list-group-item d-flex justify-content-between align-items-lg-start bg-@(item2.PokemonType.Name)">
+                                                    <span class="badge bg-primary rounded-pill">@item2.Slot</span>
+                                                    <p>@item2.PokemonType.Name </p>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+            </div>
+        }
+    </div>
+}
+@code {
+    [Parameter]
+    public List<Pokemon> Pokemons { get; set; } = new List<Pokemon>();
+    [Parameter]
+    public int NumbersRows { get; set; } = 5;
+}
