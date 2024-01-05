@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "+ZnqY3V4Ux9hcy4Jt2EgajtDdRPVKWTL4SNhHyWKbAMrXFshVGfzRsCIl3FnqckP5jnFdDfRdyz+0L0a7jqBIg==",
+  "success": true,
+  "projectFilePath": "C:\\Desarrollo\\Net\\BlazorPokedex\\BlazorPokedex.Services\\BlazorPokedex.Services.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ecefr\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

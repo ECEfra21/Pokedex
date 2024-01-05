@@ -12,63 +12,86 @@ else
     <div class="content-fluid">
         <h3>@Pokemon.Name.ToUpper()</h3>
 
-        <fieldset title="@Pokemon.Name.ToUpper()">
-            <div class="row">
-                <div class="col-6">
-                    <div class="col-md-3 mb-3">
-                        <h3>Heigth</h3>
-                        @Pokemon.Heigth
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <h3>Experience</h3>
-                        @Pokemon.Heigth
-                    </div>
+        <div class="row">
+            <div class="col-2 mb-3 text-center">
+                Heigth : <b class="float-right" id="inputEmail3">@Pokemon.Heigth </b>
+            </div>
+            <div class="col-2 mb-3">
+                Weight : <b class="float-right text-center" id="inputEmail3">@Pokemon.Weight </b>
+            </div>
+            <div class="col-md-2 mb-3 text-center">
+                Experience : <b class="float-right text-center" id="inputEmail3">@Pokemon.Experience </b>
+            </div>
 
-                    <div class="col-md-3 mb-3">
-                        <h3>Experience</h3>
-                        @Pokemon.Experience
-                    </div>
+            <div class="col-6">
+                <b for="exampleInputEmail1" class="form-label">Types</b>
+                <ul class="list-group">
+                    @foreach (var item2 in Pokemon.Types)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-lg-start bg-@(item2.PokemonType.Name)">
+                            <span class="badge bg-primary rounded-pill">@item2.Slot</span>
+                            <p>@item2.PokemonType.Name </p>
+                        </li>
+                    }
+                </ul>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card pokeCard mb-4 bg-@(Pokemon.Types.FirstOrDefault().PokemonType.Name)">
+                <div class="card-header">
                 </div>
-                <div class="col-6">
-                    <ul class="list-group">
-                        @foreach (var item2 in Pokemon.Types)
-                        {
-                            <li class="list-group-item d-flex justify-content-between align-items-lg-start bg-@(item2.PokemonType.Name)">
-                                <span class="badge bg-primary rounded-pill">@item2.Slot</span>
-                                <p>@item2.PokemonType.Name </p>
-                            </li>
-                        }
-                    </ul>
-
+                <div class="card-body">
+                    <img src="@(Pokemon.Sprite.Front)" class="img-fluid imagesPoke" alt="@(Pokemon.Name)">
+                    <br>
+                </div>
+                <div class="card-footer">
                 </div>
             </div>
 
-        </fieldset>
 
-    </div>
-
-    <fieldset>
-        <div class="row">
-            <div class="col-12">
-                <div class="col-md-4 mb-4">
-                    <img src="@(Pokemon.Sprite.Front)" class="img-fluid imagesPoke1" alt="@(Pokemon.Name)">
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card pokeCard mb-4 bg-@(Pokemon.Types.FirstOrDefault().PokemonType.Name)">
+                <div class="card-header">
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="card-body">
                     <img src="@(Pokemon.Sprite.FrontShiny)" class="img-fluid imagesPoke" alt="@(Pokemon.Name)">
+                    <br>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <img src="@(Pokemon.Sprite.Back)" class="img-fluid imagesPoke" alt="@(Pokemon.Name)">
-                </div>
-                <div class="col-md-4 mb-4">
-                    <img src="@(Pokemon.Sprite.BackShiny)" class="img-fluid imagesPoke" alt="@(Pokemon.Name)">
+                <div class="card-footer">
                 </div>
             </div>
         </div>
-
-    </fieldset>
+        <div class="col-md-3 mb-3">
+            <div class="card pokeCard mb-4 bg-@(Pokemon.Types.FirstOrDefault().PokemonType.Name)">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <img src="@(Pokemon.Sprite.Back)" class="img-fluid imagesPoke" alt="@(Pokemon.Name)">
+                    <br>
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card pokeCard mb-4 bg-@(Pokemon.Types.FirstOrDefault().PokemonType.Name)">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <img src="@(Pokemon.Sprite.BackShiny)" class="img-fluid imagesPoke" alt="@(Pokemon.Name)">
+                    <br>
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 }
-
 
 @code {
     [Parameter]
